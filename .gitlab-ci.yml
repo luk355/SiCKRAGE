@@ -24,7 +24,7 @@ deploy_docker_develop_arm32v7:
     - echo -n $CI_REGISTRY_PASSWORD | docker login -u "$CI_REGISTRY_USER" --password-stdin
     - docker build --network host --build-arg="SOURCE_COMMIT=$CI_COMMIT_SHA" -t $CONTAINER_IMAGE:$(cat sickrage/version.txt).arm32v7 -f Dockerfile.arm32v7 .
   only:
-    - testing
+    - added_docker_arm_support
   except:
     - tags
 
@@ -39,6 +39,6 @@ deploy_docker_develop_arm64v8:
     - echo -n $CI_REGISTRY_PASSWORD | docker login -u "$CI_REGISTRY_USER" --password-stdin
     - docker build --network host --build-arg="SOURCE_COMMIT=$CI_COMMIT_SHA" -t $CONTAINER_IMAGE:$(cat sickrage/version.txt).arm64v8 -f Dockerfile.arm64v8 .
   only:
-    - testing
+    - added_docker_arm_support
   except:
     - tags
