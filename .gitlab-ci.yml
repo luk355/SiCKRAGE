@@ -9,22 +9,26 @@ variables:
   DOCKER_DRIVER: overlay2
   DOCKER_HOST: tcp://localhost:2375
 
-cache:
-  paths:
-    - .cache/pip
-
 services:
   - docker:dind
 
 deploy_docker_master:
   stage: deploy
   image: docker:latest
+  before_script:
+    - docker run --rm --privileged multiarch/qemu-user-static:register --reset
+    - | for target_arch in arm x86_64; do
+          wget -N https://github.com/multiarch/qemu-user-static/releases/download/v4.0.0/x86_64_qemu-${target_arch}-static.tar.gz
+          tar -xvf x86_64_qemu-${target_arch}-static.tar.gz
+        done
   script:
     - echo $CI_COMMIT_SHA
     - echo $CONTAINER_IMAGE
     - echo -n $CI_REGISTRY_PASSWORD | docker login -u "$CI_REGISTRY_USER" --password-stdin
-    - docker pull $CONTAINER_IMAGE:latest
-    - docker build --network host --build-arg="SOURCE_COMMIT=$CI_COMMIT_SHA" --cache-from $CONTAINER_IMAGE:latest -t $CONTAINER_IMAGE:$(cat sickrage/version.txt) -f Dockerfile .
+    - docker build --network host --build-arg="SOURCE_COMMIT=$CI_COMMIT_SHA" -t $CONTAINER_IMAGE:arm32v7-$(cat sickrage/version.txt)  -f Dockerfile.arm32v7 .
+    - docker tag $CONTAINER_IMAGE:arm32v7-$(cat sickrage/version.txt) $CONTAINER_IMAGE-arm32v7:latest
+    - docker push $CONTAINER_IMAGE:arm32v7-$(cat sickrage/version.txt)
+    - docker push $CONTAINER_IMAGE:arm32v7-latest
   only:
     - testing-gitlab-cache
   except:
