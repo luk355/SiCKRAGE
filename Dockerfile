@@ -10,7 +10,7 @@ COPY . /opt/sickrage/
 
 RUN apk add --update --no-cache libffi-dev openssl-dev libxml2-dev libxslt-dev linux-headers build-base git tzdata unrar
 RUN pip install -U pip setuptools
-RUN pip wheel --no-cache-dir --no-deps --wheel-dir /wheels -r /requirements.txt
+RUN pip wheel --no-cache-dir --no-deps --wheel-dir /wheels -r /opt/sickrage/requirements.txt
 RUN pip install --no-cache /wheels/*
 
 # ports and volumes
