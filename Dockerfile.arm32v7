@@ -1,9 +1,3 @@
-FROM alpine:3.9 as downloader
-
-RUN wget --quiet -O /qemu-arm-static \
-    https://github.com/multiarch/qemu-user-static/releases/download/v4.0.0/qemu-arm-static ;\
-    chmod +x /qemu-arm-static
-
 FROM arm32v7/python:3.7-alpine3.9
 MAINTAINER echel0n <echel0n@sickrage.ca>
 
@@ -13,7 +7,7 @@ ENV SOURCE_COMMIT $SOURCE_COMMIT
 ENV TZ 'Canada/Pacific'
 
 # add qemu for cross build
-COPY --from=downloader /qemu-arm-static /usr/bin/qemu-arm-static
+COPY qemu-arm-static /usr/bin/
 
 # install app
 COPY . /opt/sickrage/
