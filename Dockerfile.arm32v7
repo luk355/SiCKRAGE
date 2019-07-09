@@ -1,5 +1,5 @@
 FROM alpine:3.9 as downloader
-RUN wget --quiet -O /qemu-aarch64-static \
+RUN wget --quiet -O /x86_64_qemu-arm-static \
     https://github.com/multiarch/qemu-user-static/releases/download/v4.0.0/x86_64_qemu-arm-static ;\
     chmod +x /x86_64_qemu-arm-static
 
