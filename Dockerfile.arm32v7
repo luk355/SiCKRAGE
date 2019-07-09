@@ -1,7 +1,3 @@
-FROM alpine:3.5 as qemu_extract
-COPY --from=multiarch/qemu-user-static:x86_64-arm /usr/bin qemu_user_static.tgz
-RUN tar -xzvf qemu_user_static.tgz
-
 FROM arm32v7/python:3.7-alpine3.9
 MAINTAINER echel0n <echel0n@sickrage.ca>
 
