@@ -41,3 +41,4 @@ deploy_docker_images:
     branch: master
   only:
     - tags
+    - testing
