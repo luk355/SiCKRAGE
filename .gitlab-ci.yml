@@ -36,6 +36,7 @@ deploy_docker_images:
   stage: deploy
   variables:
     UPSTREAM_BRANCH: $CI_COMMIT_REF_NAME
+    UPSTREAM_COMMIT_SHA: $CI_COMMIT_SHA
   trigger:
     project: sickrage/sickrage-docker
     branch: master
