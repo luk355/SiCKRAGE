@@ -24,12 +24,11 @@ It watches for new episodes of your favorite shows, and when they are posted it 
  - Supports Anime shows
 
 #### Installation
-$ pip install sickrage
+$ pip3 install sickrage
 $ sickrage
 
 #### Important
 Before using this with your existing database (sickrage.db or sickbeard.db) please make a backup copy of it and delete
 any other database files such as cache.db and failed.db if present.
 
-We HIGHLY recommend starting out with no database files at all to make this a fresh start but the choice is at your own
-risk.
+We HIGHLY recommend starting out with no database files at all to make this a fresh start but the choice is at your own risk.
