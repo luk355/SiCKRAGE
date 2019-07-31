@@ -24,7 +24,7 @@ It watches for new episodes of your favorite shows, and when they are posted it 
  - Supports Anime shows
 
 #### Installation
-$ pip install sickrage
+$ pip3 install sickrage
 $ sickrage
 
 #### Important
